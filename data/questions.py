@@ -2,11 +2,11 @@ import psycopg2
 
 def connect_db():
     conn = psycopg2.connect(
-    host="localhost", 
+    host="localhost",
     port=5432,
-    database="postgres",
+    database="testdb",
     user="postgres",
-    password="hello")
+    password="postgres")
     return conn
 
 
