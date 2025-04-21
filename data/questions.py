@@ -23,7 +23,7 @@ def question_1_query():
 def question_2_query():
     connection = connect_db()
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM orders ORDER BY total_amount DESC LIMIT 4;')
+    cursor.execute('SELECT * FROM orders ORDER BY total_amount DESC LIMIT 5;')
     data = cursor.fetchall()
     cursor.close()
     connection.close()

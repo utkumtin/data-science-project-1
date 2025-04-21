@@ -46,7 +46,7 @@ jobs:
     - name: Create schema and seed data
       run: |
         source venv/bin/activate
-        python scripts/init_db.py  # Aşağıda anlattığım dosya olacak
+        python scripts/init_db.py 
 
     - name: Run Tests
       run: |
