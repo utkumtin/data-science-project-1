@@ -1,34 +1,27 @@
-# Preparations:
-  1. İlk olarak aşağıdaki tabloları Postgres veritabanında oluşturunuz.
-    - CREATE TABLE customers (customer_id SERIAL PRIMARY KEY,customer_name VARCHAR(100),email VARCHAR(100),country VARCHAR(50),signup_date DATE);
-    - CREATE TABLE orders (order_id SERIAL PRIMARY KEY,customer_id INTEGER REFERENCES customers(customer_id),order_date DATE,total_amount NUMERIC(10,2));
-    - CREATE TABLE products (product_id SERIAL PRIMARY KEY,product_name VARCHAR(100),price NUMERIC(8,2),stock_quantity INTEGER);
-  2. İkinci olarak tablolara ilgili verileri eklemek için aşağıdaki sorugları da çalıştırınız.
-    - INSERT INTO customers (customer_name, email, country, signup_date) VALUES
-        ('Ali Veli', 'ali.veli@example.com', 'Turkey', '2022-01-10'),
-        ('Ayşe Yılmaz', 'ayse.yilmaz@example.com', 'Turkey', '2021-05-03'),
-        ('John Doe', 'john.doe@example.com', 'USA', '2020-11-15'),
-        ('Emma Brown', 'emma.b@example.co.uk', 'UK', '2023-02-21'),
-        ('Carlos Mendez', 'carlos.m@example.com', 'Mexico', '2022-07-12'),
-        ('Merve Demir', 'merve.d@example.com', 'Turkey', '2021-09-30');
-    - INSERT INTO products (product_name, price, stock_quantity) VALUES
-        ('Wireless Mouse', 199.90, 30),
-        ('Gaming Keyboard', 499.99, 15),
-        ('USB-C Cable', 49.95, 100),
-        ('27" Monitor', 1899.00, 8),
-        ('Laptop Stand', 329.50, 20),
-        ('Noise-Cancelling Headphones', 1250.75, 5);
+# Data Science SQL Project 1
 
-    - INSERT INTO orders (customer_id, order_date, total_amount) VALUES
-        (1, '2022-01-15', 249.90),
-        (2, '2022-06-10', 499.99),
-        (3, '2023-01-05', 1250.75),
-        (1, '2023-03-12', 199.90),
-        (4, '2023-05-01', 329.50),
-        (5, '2023-06-18', 1899.00),
-        (6, '2021-10-10', 49.95);
-    
-    3. 3 tabloyada birer SELECT sorgusu atarak tablolara tanımaya çalışın daha sonra aşağıdaki 10 soru için ilgili sql leri yazmaya çalışınız. 
+### Proje Kurulumu
+Projeyi öncelikle forklayın ve clone edin.
+Proje sayımız ilerledikçe proje yönetimimizi kolaylaştırmak adına projelerimizi belli klasör kalıplarında saklamak işimizi kolaylaştırmak adına iyi bir alışkanlıktır.
+Örnek bir Lokasyon: Code2Work/DataScience/data-project-2.
+
+### Proje Kurulumu Komutlar
+Aşağıdaki komutları sıtrayla çalıştırınız.
+* python -m venv venv
+* venv\Scripts\activate
+* pip install -r requirements.txt => Install all dependencies
+* python tests/test_question.py => Python run all tests
+
+## Bonus
+* Eğer daha detaylı bir şekilde testlerin içerisine bakmak isterseniz
+* pytest .\tests\test_question.py -s -v 
+
+### Projeye Başlamadan Önce
+* Belirtilen sql querylerini yazabilmek için scripts klasörü altındaki bulunan init_db.py dosyası içerisindeki tüm queryleri 
+sırasıyla kendi local veritabanınızda çalıştırınız. 
+* Veritabanınızın hazır olduğundan emin olmak için tüm tablolara birer SELECT sorgusu atıp sonuçların doğru olduğundan emin olunuz.
+* Çalışırken sadece data klasörü altında bulunan questions.py dosyasında çalışacağız. Bunun klasör dışındaki kodları değiştirmeyiniz !
+* connect_db fonksiyonu içerisinde veritabanına bağlanma bilgileri var. Projenizi kendi localinizde test ederken burada bilgileri kendi local veritabanı bilgilerinizle değiştirerek test ediniz. Ancak kodunuzu <b>pushlarken bu veritabanı bilgilerini ilk bulduğunuz şekilde bırakınız.</b> Çünkü kodlarınız Cloud bir ortamda bu bilgilerle bir veritabanına bağlancaklardır.
 
 # Questions
 1. customers tablosundan tüm müşterilerin adlarını ve ülkelerini getir.

@@ -2,6 +2,7 @@ import datetime
 from decimal import Decimal
 import sys
 import os
+import requests
 from unittest.mock import MagicMock, patch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pytest
@@ -74,6 +75,17 @@ def test_question_10_query():
     run_common_test(expected, question_10_query)
 
 
+def send_post_request(url: str, data: dict, headers: dict = None):
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        response.raise_for_status()  # hata varsa exception fırlatır
+        return response.json()
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP error occurred: {http_err} - Status Code: {response.status_code}")
+    except Exception as err:
+        print(f"Other error occurred: {err}")
+
+
 class ResultCollector:
     def __init__(self):
         self.passed = 0
@@ -91,6 +103,21 @@ def run_tests():
     pytest.main(["tests"], plugins=[collector])
     print(f"\nToplam Başarılı: {collector.passed}")
     print(f"Toplam Başarısız: {collector.failed}")
+    
+    user_score = (collector.passed / (collector.passed + collector.failed)) * 100
+    print(round(user_score, 2))
+    
+    url = "https://edugen-backend-487d2168bc6c.herokuapp.com/projectLog/"
+    payload = {
+        "user_id": 34,
+        "project_id": 1,
+        "user_score": round(user_score, 2),
+        "is_auto": False
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    send_post_request(url, payload, headers)
 
 if __name__ == "__main__":
     run_tests()
