@@ -13,7 +13,7 @@ def connect_db():
 def question_1_query():
     connection = connect_db()
     cursor = connection.cursor()
-    cursor.execute('SELECT course_name, country FROM customers')
+    cursor.execute('SELECT customer_name, country FROM customers')
     data = cursor.fetchall()
     cursor.close()
     connection.close()
