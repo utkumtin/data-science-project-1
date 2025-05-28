@@ -1,0 +1,12 @@
+1) Projeyi forkla daha sonra clone et:
+git clone https://github.com/utkumtin/data-science-project-1.git
+
+2) VS Code üzerinden proje klasörünü aç.
+
+3) Projenin README dosyasındaki komutları sırayla çalıştır.
+
+4) init_db içerisindeki CREATE ve INSERT scriptlerini kendi local veritabanında çalıştır.
+
+5) Veritabanı şifresini kendi şifren olarak belirle.
+
+6) Öğrenci numaranı mutlaka update et.
